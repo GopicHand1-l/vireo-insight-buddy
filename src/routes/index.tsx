@@ -261,7 +261,7 @@ function Validation() {
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const facts = useMemo(
-    () => JSON.stringify({ kpis: K, flagged_agents: data.agents.filter((a) => a.flag).map(({ id, name, team, csat, expected, shrunk, ci_hi }) => ({ id, name, team, csat, expected, shrunk, ci_hi })), tier2: data.agents.filter((a) => a.tier === 2).map(({ id, name, csat, expected, shrunk }) => ({ id, name, csat, expected, shrunk })) }),
+    () => JSON.stringify({ glossary: "festive_* = tickets on Pulse 2 (VA-EB-PL2) units from manufacturing lots PL2-2510 to PL2-2512 (Oct-Dec 2025), a hardware defect: left-bud charging failure / pin corrosion. base_* = all other tickets. rates are fractions (0.368 = 36.8%).", kpis: K, flagged_agents: data.agents.filter((a) => a.flag).map(({ id, name, team, csat, expected, shrunk, ci_hi }) => ({ id, name, team, csat, expected, shrunk, ci_hi })), tier2: data.agents.filter((a) => a.tier === 2).map(({ id, name, csat, expected, shrunk }) => ({ id, name, csat, expected, shrunk })) }),
     [],
   );
   const checks = useMemo(() => (text ? verify(text) : []), [text]);
