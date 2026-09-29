@@ -52,14 +52,14 @@ for aid,grp in t.groupby('agent_id'):
     r=ag[ag.agent_id==aid].iloc[0]; sc=s[s.agent_id==aid]; h=hc[hc.agent_id==aid]
     n=len(sc); res=sc.resid.mean() if n else 0; se=sc.resid.std()/np.sqrt(n) if n>1 else 1
     k=15; shr=res*n/(n+k)
-    agents.append(dict(id=aid,name=r['name'],team=r.team,site=r.site,shift=r.shift,tier=int(r.tier),
+    agents.append(dict(id=aid,name=r['name'],team=r.team,site=r.site,shift=r['shift'],tier=int(r.tier),
       tickets=len(grp),csat_n=n,csat=round(sc.csat_score.mean(),2),expected=round(sc.exp.mean(),2),
       residual=round(res,3),shrunk=round(shr,3),ci_lo=round(res-1.96*se,3),ci_hi=round(res+1.96*se,3),
       handle_med=round(h.handle_h.median(),1),handle_exp=round(h.exp_h.median(),1),
       handle_ratio=round((h.handle_h/h.exp_h.replace(0,np.nan)).median(),2),
       breach_rate=round(grp.breach.mean(),3),festive_share=round(grp.festive_lot.mean(),3),
       hardware_share=round(grp.category.isin(['Charging & Battery','Audio Quality','Connectivity','Hardware Fault']).mean(),3),
-      night_share=round((r.shift=='Night')*1.0,1)))
+      night_share=round((r['shift']=='Night')*1.0,1)))
 A=pd.DataFrame(agents)
 A['naive_rank']=A.csat.rank(method='first').astype(int)
 A['naive_bottom10']=A.naive_rank<=10
