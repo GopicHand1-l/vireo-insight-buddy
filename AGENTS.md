@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Dashboard data is precomputed by scripts/etl.py into src/data/dashboard.json; AI only narrates these figures and is number-checked client-side. Why: deterministic, verifiable metrics.
